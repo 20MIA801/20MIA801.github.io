@@ -36,7 +36,7 @@
       request.onload = function() {                       // when the data comes back, do this...
       var data = JSON.parse(request.responseText);    // de-stringify JSON back to regular array of JavaScript objects
       major_status = data.filter(getList)       // major_status array will contain the filtered data using the getList() function
-         function getList(item) {
+         function getList(major) {
             return item.major == sel_major;   // the new major_status array will contain only items for the selected major
          }
           if (request.status == 200) {
@@ -50,5 +50,6 @@
           }
       }    // end request.onload
     request.send(null);
+  }
   </script>
   </html>
