@@ -1,6 +1,7 @@
 <!DOCTYPE html>
   <html><head>  <meta charset="UTF-8"> <title>students</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
 
   <body style='margin-left: 30px;'>
@@ -10,6 +11,7 @@
      <p>We filter out dataset by Major</p>
     <div id="peopleTable"></div>
   </body>
+    
   <script type="text/x-handlebars-template" id="tableTemplate">
      <table cellspacing='12'>
          <tr><th>Name</th><th>Major</th><th>Midterm</th><th>Final</th></tr>
@@ -20,13 +22,19 @@
             {{/each}}
      </table>
   </script>
+    
   <script>
+    function getMajor(sel_major) {
       var request = new XMLHttpRequest();
       var url = "cit5students.json";     // datafile name
       request.open('GET', url);     // open ajax request
 
       request.onload = function() {                       // when the data comes back, do this...
-          var data = JSON.parse(request.responseText);    // de-stringify JSON back to regular array of JavaScript objects
+      var data = JSON.parse(request.responseText);    // de-stringify JSON back to regular array of JavaScript objects
+      major_status = data.filter(getList)       // major_status array will contain the filtered data using the getList() function
+         function getList(item) {
+            return item.major == sel_major;   // the new major_status array will contain only items for the selected major
+         }
           if (request.status == 200) {
               var templateText = document.getElementById('tableTemplate').innerHTML;  // Get template text 
               var compiledTemplateText = Handlebars.compile(templateText);         // Compile the Handlebars template
