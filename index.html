@@ -7,11 +7,8 @@
      <h1>Select a Major</h1>
       <p><button type='button' id="btn1">CIT</button></p>
       <p><button type='button' id="btn2">BUS</button></p>
-      <div id="peopleTable"></div>
-  
-     
- 
      <p>We filter out dataset by Major</p>
+    <div id="peopleTable"></div>
   </body>
   <script type="text/x-handlebars-template" id="tableTemplate">
      <table cellspacing='12'>
@@ -39,6 +36,7 @@
           else {
              document.querySelector('#peopleTable').innerHTML = "There was an error, or data not found";
           }
-      }        // end request.onload
+      }    // end request.onload
+    request.send(null);
   </script>
   </html>
